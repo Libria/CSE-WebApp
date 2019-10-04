@@ -27,12 +27,19 @@ ol, ul, blockquote {
 ul {
   list-style: square;
 }
-
+/*
 .favor {
   outline-style: solid;
   outline-color:  #F7931E;
   outline-width: medium;
 }
+*/
+li > img {
+  outline-style: solid;
+  outline-color:  #F7931E;
+  outline-width: medium;
+}
+
 
 dt, dd {
   font-size: 70%;
