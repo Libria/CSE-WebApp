@@ -31,7 +31,7 @@
 		<div class="section">
 			<h2>Billboard News</h2>
 
-			<ol>
+			<ol> <!-- Using sprintf('%02d', $i) that make double digits -->
 				<?php for ($i = 11; $i > 11 - $news_paper; $i--){
 					$num = sprintf('%02d', $i); ?>
 					<li><a href="https://www.billboard.com/archive/article/2019-<?= $num ?>"\>2019-<?= $num ?></a></li>
@@ -42,7 +42,7 @@
 		<!-- Ex 5: Favorite Artists from a File (Files) -->
 		<div class="section">
 			<h2>My Favorite Artists</h2>
-			<ol>
+			<ol> <!-- Using explode/implode that divide"string"/combine"string"-->
 				<?php for ($i = 0; $i < count($artist); $i++){
 					$out = explode(" ", $artist[$i]);
 					$out = implode("_", $out); ?>
@@ -56,18 +56,26 @@
 		<div class="section">
 			<h2>My Music and Playlists</h2>
 
+			<!-- Using Associative array for filesize sorting -->
 			<ul id="musiclist">
-				<?php foreach ($songs as $songsfile) { ?>
+				<?php $songs2 = [];
+				foreach ($songs as $songsfile) {
+					$songs2[basename($songsfile)] = filesize($songsfile);
+				}
+				arsort($songs2);
+				foreach($songs2 as $key => $value){ ?>
 				<li class="mp3item">
-					<a href="lab5/musicPHP/songs/<?= basename($songsfile) ?>"><?= basename($songsfile) ?> (<?= floor(filesize($songsfile) / 1024) ?> KB) </a>
+					<a href="lab5/musicPHP/songs/<?= $key ?>"><?= $key ?> (<?= floor($value / 1024) ?> KB) </a>
 				</li>
 				<?php } ?>
 
 				<!-- Exercise 8: Playlists (Files) -->
-				<?php foreach ($playlists as $playfile) {
-					$lists = file($playfile); ?>
+				<?php rsort($playlists);
+					foreach ($playlists as $playfile) {
+					$lists = file($playfile);
+					shuffle($lists); ?>
 					<li class="playlistitem"><?= basename($playfile) ?>
-						<ul>
+						<ul> <!-- Using strpos what check specific string in our variable string -->
 							<?php for ($i = 0; $i < count($lists); $i++) {
 								if (strpos($lists[$i], "#") === false) { ?>
 									<li><?= $lists[$i] ?>
