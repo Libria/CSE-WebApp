@@ -79,3 +79,15 @@ select * from student where student_id like '%2007%';
 select * from student order by student_id;
 select major from student group by major having avg(year) > 3;
 select * from student where major = 'Business Administration' and student_id like '%2007%' limit 2;
+
+
+
+
+-- I don't know where I can download imdb db;;;
+-- I couldn't find.
+/*
+select role from roles as r join movies as m where r.movie_id = m.id and m.name = 'Pi';
+select first_name, last_name, role from actors as a join roles as r where a.id = r.actor_id and a.id in (select id from movies where name='Pi');
+select first_name, last_name from actors as a join roles as r where r.id = m.id and r.actor_id in (select id from movies where name = 'Kill Bill: Vol.1') and r.actor_id in (select id from movies where name = 'Kill Bill: Vol.2');
+select id, first_name, count(movie_id) from actors as a join roles as a r where a.id = r.actor_id group by actor_id;
+*/
